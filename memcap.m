@@ -1,6 +1,7 @@
-function [ c,q,integr_q ] = memcap( C_init, C_max, C_min, kappa, input_v , integr_v, t, TIME_STEP)
-%MEMCAP Summary of this function goes here
-%   Detailed explanation goes here
+function [ c,q,cur ] = memcap( C_init, C_max, C_min, kappa, input_v , integr_v, t, TIME_STEP)
+%MEMCAP This function calculates the memcapacitance as a function of time
+%   It uses the standard mathematical model, it requires both the input and
+%   the integrated version of the input
 
 D_max = 1/C_min;
 D_min = 1/C_max;
@@ -17,10 +18,10 @@ c=zeros(1,length(t));
  q = input_v.*c;
  
   %% Calculation of the output current
-integr_q=zeros(1,length(t));
-for j=1:length(t)
-    integr_q(j)=TIME_STEP*trapz(q(1:j));
-end
+
+cur = diff(q)/TIME_STEP;
+ 
+cur(end+1) = cur(end);
 
 end
 

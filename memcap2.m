@@ -32,20 +32,27 @@ integr_v=TIME_STEP*cumtrapz(input_v(:));
 
 %INPUT voltage waveform
 figure('Name','Against time plots')
-subplot(3,1,1)
+subplot(4,1,1)
 plot(t,input_v)
 grid
 xlabel('Time')
 ylabel('Input Voltage')
 %OUTPUT Charge waveform
-subplot(3,1,2)
+subplot(4,1,2)
 plot(t,q)
 grid
 title('Charge against time plot')
 xlabel('Time')
 ylabel('Charge')
 %OUTPUT Charge waveform
-subplot(3,1,3)
+subplot(4,1,3)
+plot(t,integr_q)
+grid
+title('Current against time plot')
+xlabel('Time')
+ylabel('Current')
+%OUTPUT Capacitance waveform
+subplot(4,1,4)
 plot(t,c)
 grid
 title('Capacitance against time plot')

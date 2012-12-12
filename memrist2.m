@@ -18,8 +18,6 @@ input_v=input_ampl*sin(2*pi*FREQUENCY*t); % store sine as input
 
 
 %% Calculation of the input integral
-integr_v=zeros(1,length(t));
-
 integr_v=TIME_STEP*cumtrapz(input_v(:));
 
 
@@ -44,7 +42,7 @@ plot(t,i)
 grid
 title('Current against time plot')
 xlabel('Time')
-ylabel('Charge')
+ylabel('Current')
 %OUTPUT Charge waveform
 subplot(3,1,3)
 plot(t,m)
