@@ -3,14 +3,14 @@ close all
 
 CYCLES = 2;
 sampling_coeff=10000;
-FREQUENCY=0.1592;  %frequency of the sinusoidal input in Hz
-%FREQUENCY=linspace(1,50,20)';  %frequency of the sinusoidal input in Hz
+% FREQUENCY=0.13; %For severe
+FREQUENCY=2; %For mild
 TIME_END= CYCLES./FREQUENCY;
 TIME_STEP=1./(2*sampling_coeff*FREQUENCY);
 
 C_init = 1e-7;   %In F
 C_max = 10*1e-7;
-C_min = 10*1e-10;
+C_min = 10*1e-9;
 kappa = 10*1e6;
 
 D_max = 1/C_min;
@@ -18,13 +18,18 @@ D_min = 1/C_max;
 D0 = 1/C_init;
 delta_D = D_max - D_min;
 
-fn_handles = {@(x) window_fn_Prodro(x,0.5,200);
-    @(x) window_fn_Prodro(x,1,1);
-    @(x) window_fn_Prodro(x,4,1);
+fn_handles = {@(x) window_fn_NO_WINDOW();
+      @(x) window_fn_Prodro(x,0.5,75);
+    @(x) window_fn_Prodro(x,1,2);
+    @(x) window_fn_Prodro(x,8,1);
     @(x) window_fn_Strukov(x);
     @(x) window_fn_Joglekar(x,1)};
 
-input_ampl = 53;
+% input_ampl = 53;
+
+input_ampl = 5;
+
+sprintf('%f should be larger than %f',D0^2/(2*delta_D*kappa), input_ampl/(pi*FREQUENCY))
 
 %----------------------------------------------------------------------
 tspan = zeros(length(FREQUENCY),2*sampling_coeff*CYCLES+1);
@@ -54,9 +59,10 @@ parfor ii = 1:length(fn_handles)
 end
 
 %% Plotting
-str_leg = { 'Prodromakis j=0.5, p=200';
-    'Prodromakis j=1, p=1';
-    'Prodromakis j=4, p=1';
+str_leg = { 'No Window';
+    'Prodromakis j=0.5, p=75';
+    'Prodromakis j=1, p=2';
+    'Prodromakis j=8, p=1';
     'Strukov';
     'Joglekar p=1'};
 
