@@ -4,7 +4,7 @@ close all
 CYCLES = 2;
 sampling_coeff=10000;
 % FREQUENCY=0.13; %For severe
-FREQUENCY=2; %For mild
+FREQUENCY=10; %For mild
 TIME_END= CYCLES./FREQUENCY;
 TIME_STEP=1./(2*sampling_coeff*FREQUENCY);
 
@@ -19,11 +19,7 @@ D0 = 1/C_init;
 delta_D = D_max - D_min;
 
 fn_handles = {@(x) window_fn_NO_WINDOW();
-      @(x) window_fn_Prodro(x,0.5,75);
-    @(x) window_fn_Prodro(x,1,2);
-    @(x) window_fn_Prodro(x,8,1);
-    @(x) window_fn_Strukov(x);
-    @(x) window_fn_Joglekar(x,1)};
+      };
 
 % input_ampl = 53;
 
@@ -73,19 +69,19 @@ for ii = 1:length(fn_handles)
 end
 ylabel('Current - I (A)')
 xlabel('Input Voltage - V (V)')
-legend(str_leg)
-legend('location','SouthEast')
+% legend(str_leg)
+% legend('location','SouthEast')
 grid;
 
 figure('Name', 'Charge against Voltage') 
 hold all
 for ii = 1:length(fn_handles)
-    plot(input_v, abs(Q(ii,:)) , get_line_style( ii ))
+    plot(input_v, Q(ii,:) , get_line_style( ii ))
 end
 ylabel('Charge - Q (C)')
 xlabel('Input Voltage - V (V)')
-legend(str_leg)
-legend('location','SouthEast')
+% legend(str_leg)
+% legend('location','SouthEast')
 grid;
 
 figure('Name', 'Inverse Capacitance against time') 

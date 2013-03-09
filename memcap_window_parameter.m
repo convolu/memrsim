@@ -52,7 +52,10 @@ parfor ii = 1:length(p)
     I(ii,:) = diff(Q(ii,:)) ./ diff (tspan);
     
     C(ii,:) = 1 ./ D(ii,:);
+    
+    y(ii,:) = (D(ii,:)- D_min)/delta_D;
 end
+
 
 %% Plotting
 
@@ -100,6 +103,17 @@ for ii = 1:length(p)
     plot(tspan, C(ii,:),get_line_style( ii ))
 end
 ylabel('Capacitance - C (C)')
+xlabel('Time - t (s)')
+legend(str_leg)
+legend('location','SouthEast')
+grid;
+
+figure('Name', 'State variable against time') 
+hold all
+for ii = 1:length(p)
+    plot(tspan, y(ii,:),get_line_style( ii ))
+end
+ylabel('State Variable y')
 xlabel('Time - t (s)')
 legend(str_leg)
 legend('location','SouthEast')
