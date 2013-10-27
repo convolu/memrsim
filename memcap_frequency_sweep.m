@@ -5,6 +5,9 @@ TIME_END=30;     %In secs
 
 FREQUENCY=[0.01, 0.10, 1, 10, 30, 50, 80, 100, 150, 200, 250, 300, 350, 400, 450:50:2000];  %frequency of the sinusoidal input in Hz
 
+% FREQUENCY=[0.01, 0.10, 1, 10, 100, 1000];%frequency of the sinusoidal input in Hz
+
+
 TIME_STEP=1/(2*6*max(FREQUENCY)); 
 
 
@@ -51,7 +54,7 @@ for l=1:length(FREQUENCY)
             str(l,:)=sprintf('%1.2e Hz', FREQUENCY(l));
 end
 
-if 0
+if 1
 %INPUT voltage waveform
 figure('Name','Against time plots')
 subplot(3,1,1)

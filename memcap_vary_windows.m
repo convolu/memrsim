@@ -65,7 +65,7 @@ str_leg = { 'No Window';
 figure('Name', 'Current against voltage') 
 hold all
 for ii = 1:length(fn_handles)
-    plot(input_v(1,1:end-1), I(ii,:) , get_line_style( ii ))
+    plot(input_v(1,1:end-1), I(ii,:) , get_line_spec( ii ))
 end
 ylabel('Current - I (A)')
 xlabel('Input Voltage - V (V)')
@@ -76,7 +76,7 @@ grid;
 figure('Name', 'Charge against Voltage') 
 hold all
 for ii = 1:length(fn_handles)
-    plot(input_v, Q(ii,:) , get_line_style( ii ))
+    plot(input_v, Q(ii,:) , get_line_spec( ii ))
 end
 ylabel('Charge - Q (C)')
 xlabel('Input Voltage - V (V)')
@@ -87,7 +87,7 @@ grid;
 figure('Name', 'Inverse Capacitance against time') 
 hold all
 for ii = 1:length(fn_handles)
-    plot(tspan, D(ii,:),get_line_style( ii ))
+    plot(tspan, D(ii,:),get_line_spec( ii ))
 end
 ylabel('Inverse Capacitance - D (1/C)')
 xlabel('Time - t (s)')
@@ -98,7 +98,7 @@ grid;
 figure('Name', 'Capacitance against time') 
 hold all
 for ii = 1:length(fn_handles)
-    plot(tspan, C(ii,:),get_line_style( ii ))
+    plot(tspan, C(ii,:),get_line_spec( ii ))
 end
 ylabel('Capacitance - C (C)')
 xlabel('Time - t (s)')

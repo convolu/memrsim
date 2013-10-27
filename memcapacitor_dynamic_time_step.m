@@ -4,7 +4,8 @@ close all;
 CYCLES = 2;
 sampling_coeff=15;
 % FREQUENCY=[ 100, 800, 1e3, 1e4, 1e5, 1e6]';  %frequency of the sinusoidal input in Hz
-FREQUENCY=linspace(1,50,20)';  %frequency of the sinusoidal input in Hz
+% FREQUENCY=linspace(1,50,20)';  %frequency of the sinusoidal input in Hz
+FREQUENCY=[0.01, 0.1, 1, 10, 100, 1000];  %frequency of the sinusoidal input in Hz
 TIME_END= CYCLES./FREQUENCY;
 TIME_STEP=1./(2*sampling_coeff*FREQUENCY);
 
